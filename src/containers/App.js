@@ -1,32 +1,27 @@
-import React, { Component } from 'react';
+import React from 'react';
 import {
   BrowserRouter as Router,
   Route
 } from 'react-router-dom';
 import NavBar from '../components/NavBar';
-import MoviesPage from './MoviesPage';
+import Home from '../components/Home';
+import Actors from '../components/Actors';
+import Directors from '../components/Directors';
+import Movies from '../components/Movies';
 
-class App extends Component {
 
-  state = {
-    movies: {
-      1: { id: 1, title: 'A River Runs Through It' },
-      2: { id: 2, title: 'Se7en' },
-      3: { id: 3, title: 'Inception' }
-    }
-  }
+const App = (props) => {
+  return (
+    <Router>
+      <div>
+        <NavBar/>
+        <Route exact path="/" component={Home} />
+        <Route exact path="/movies" component={Movies} />
+        <Route exact path="/directors" component={Directors} />
+        <Route exact path="/actors" component={Actors} />
+      </div>
+    </Router>
+  );
+};
 
-  render() {
-    return (
-      <Router>
-        <div>
-          <NavBar />
-          <Route exact path="/" render={() => <div>Home</div>} />
-          <Route path='/movies' render={routerProps => <MoviesPage {...routerProps} movies={this.state.movies}/>} />
-        </div>
-      </Router>
-    );
-  }
-}
-
-export default App;
+export default App
